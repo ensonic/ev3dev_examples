@@ -318,7 +318,7 @@ class Robot(Communicate):
 
     def talk(self, s):
         self.write('/sys/devices/platform/snd-legoev3/volume', '100')
-        os.system('espeak -v en -p 0 -s 120 "' + s + '" --stdout | aplay')
+        os.system('espeak -v en -p 20 -s 120 "' + s + '" --stdout | aplay -q')
 
     def show_image(self, path):
         os.system('fbi -d /dev/fb0 -T 1 -noverbose -a ' + path)

@@ -9,19 +9,16 @@ class Communicate():
     onoff = ['off', 'on']
 
     def read(self, path):
-        pin = open(path, 'r')
-        try:
-            value = pin.read()
-        except:
-            value = '0'
-
-        pin.close()
+        with open(path, 'r') as pin:
+          try:
+              value = pin.read()
+          except:
+              value = '0'
         return value
 
     def write(self, path, value):
-        pout = open(path, 'w')
-        pout.write(value)
-        pout.close()
+        with open(path, 'w') as pout:
+          pout.write(value)
 
     def set_on_off(self, path, value):
         self.write(path, Communicate.onoff[value])

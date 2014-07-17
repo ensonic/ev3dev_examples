@@ -312,6 +312,10 @@ class Robot(Communicate):
         self.leds = Leds()
         self.LCD = LCD()
 
+    def beep(self):
+        self.write('/sys/devices/platform/snd-legoev3/volume', '100')
+        os.system('beep')
+
     def talk(self, s):
         self.write('/sys/devices/platform/snd-legoev3/volume', '100')
         os.system('espeak -v en -p 0 -s 120 "' + s + '" --stdout | aplay')

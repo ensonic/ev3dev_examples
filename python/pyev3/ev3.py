@@ -116,7 +116,16 @@ class Motor(Communicate):
 
     def __init__(self, port = None):
         if port:
-            self.path = '/sys/class/tacho-motor/out' + port + ':motor:tacho/'
+            self.set_path_from_port(port)
+        else:
+            self.path = None
+
+    def set_path_from_port (self, port):
+        paths = glob.glob('/sys/bus/legoev3/devices/out%s:motor/tacho-motor/tacho-motor*/' % port)
+        if paths and os.path.exists(paths[0]):
+            self.path = paths[0]
+        else:
+            self.path = None
 
     def set_run_mode(self, value):
         path = self.path + 'run_mode'
